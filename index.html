@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI, Superintelligence & Nuclear Weapons — Interactive Comparison</title>
+<meta name="description" content="An interactive undergraduate-level comparison of AI, superintelligence and nuclear weapons, with layered depth and an age/perception addendum.">
+<style>
+:root {
+  --bg:#0b1020; --panel:#121a2d; --panel2:#18223a; --text:#edf2ff; --muted:#aebbd6;
+  --line:#283652; --accent:#8fb5ff; --warm:#ffbe76; --cool:#8de1d3; --soft:#c8d3ef;
+  --max:1160px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:
+radial-gradient(circle at 10% 0%,#172346 0,transparent 28%),
+radial-gradient(circle at 90% 10%,#173b43 0,transparent 23%),var(--bg);color:var(--text);line-height:1.55}
+a{color:var(--accent)} button,input{font:inherit}
+.wrap{max-width:var(--max);margin:auto;padding:0 24px}
+.hero{padding:72px 0 38px}
+.eyebrow{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cool);font-weight:800}
+h1{font-size:clamp(2.3rem,6vw,5.6rem);line-height:.95;margin:.25em 0 .32em;letter-spacing:-.055em;max-width:980px}
+.lede{max-width:800px;font-size:1.15rem;color:var(--muted)}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:11px 15px;border-radius:12px;text-decoration:none;cursor:pointer}
+.btn.primary{background:var(--text);color:#11182a;border-color:var(--text);font-weight:800}
+.note{margin:34px 0 10px;padding:14px 16px;border:1px solid var(--line);background:#0e1528aa;border-radius:14px;color:var(--muted)}
+.section{padding:38px 0 62px}
+.section h2{font-size:clamp(1.7rem,3vw,2.7rem);margin:.2em 0 .3em;letter-spacing:-.03em}
+.section-intro{color:var(--muted);max-width:780px}
+.glance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.glance-card{padding:18px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,#15203a,#10182a)}
+.glance-card .num{font-size:.72rem;color:var(--cool);font-weight:800;letter-spacing:.12em}
+.glance-card h3{font-size:1.05rem;margin:.5em 0 .3em}
+.glance-card p{margin:0;color:var(--muted);font-size:.94rem}
+.controls{position:sticky;top:0;z-index:20;background:#0b1020e8;backdrop-filter:blur(12px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0;margin:8px 0 22px}
+.control-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.filter{border:1px solid var(--line);color:var(--muted);background:transparent;border-radius:999px;padding:7px 11px;cursor:pointer}
+.filter.active{background:var(--text);color:#11182a;border-color:var(--text);font-weight:800}
+.search{margin-left:auto;min-width:240px;background:#10182a;border:1px solid var(--line);color:var(--text);padding:8px 11px;border-radius:10px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.dimension-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;transition:.2s ease}
+.dimension-card:hover{transform:translateY(-2px);border-color:#40547d}
+.card-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.tag{display:inline-block;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cool);font-weight:800}
+.dimension-card h3{margin:.25em 0 .35em;font-size:1.25rem}
+.summary{color:var(--muted);margin:.4em 0 0}
+.expand-btn{width:34px;height:34px;flex:0 0 auto;border:1px solid var(--line);border-radius:50%;color:var(--text);background:var(--panel2);font-size:1.25rem;cursor:pointer}
+.layer-2{display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.dimension-card.open .layer-2{display:block}
+.dimension-card.open .expand-btn{transform:rotate(45deg)}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.compare-grid section{padding:13px;border-radius:13px;background:#0d1426}
+.compare-grid p{font-size:.92rem;color:var(--soft);margin:.5em 0 0}
+.mini-label{font-size:.68rem;font-weight:900;letter-spacing:.1em}
+.mini-label.nuclear{color:var(--warm)} .mini-label.ai{color:var(--cool)}
+.synthesis{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+.synth{padding:22px;border-radius:18px;background:linear-gradient(135deg,#172344,#121a2d);border:1px solid var(--line)}
+.synth h3{margin-top:0}
+.synth p{color:var(--muted)}
+.horizon{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;margin:28px 0}
+.horizon-box{padding:22px;background:var(--panel);border:1px solid var(--line);border-radius:18px}
+.horizon-box h3{margin:.15em 0 .35em}
+.arrow{font-size:2rem;color:var(--accent)}
+.age-stack{display:grid;gap:10px}
+.age-card{border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+.age-head{width:100%;display:flex;justify-content:space-between;align-items:center;border:0;background:transparent;color:var(--text);padding:14px 16px;text-align:left;font-weight:800;cursor:pointer}
+.age-body{display:none;padding:0 16px 16px}
+.age-card.open .age-body{display:block}
+.age-card.open .chev{transform:rotate(180deg)}
+.age-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.age-cols section{background:#0d1426;padding:13px;border-radius:12px}
+.age-cols h4{margin:0 0 .4em;font-size:.88rem;color:var(--accent)}
+.age-cols p{margin:0;color:var(--soft);font-size:.92rem}
+.interpretation{margin-top:11px;color:var(--muted);font-size:.92rem}
+.refs details{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:16px}
+.refs summary{cursor:pointer;font-weight:800}
+.refs li{margin:10px 0;color:var(--muted)}
+.footer{padding:28px 0 60px;color:#7f8daa;font-size:.86rem}
+.hidden{display:none!important}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--cool));width:0;z-index:100}
+@media(max-width:820px){
+ .glance-grid,.grid,.synthesis{grid-template-columns:1fr 1fr}
+ .compare-grid,.age-cols{grid-template-columns:1fr}
+ .horizon{grid-template-columns:1fr} .arrow{transform:rotate(90deg);text-align:center}
+ .search{order:2;width:100%;margin-left:0}
+}
+@media(max-width:560px){
+ .wrap{padding:0 16px} .hero{padding-top:52px}
+ .glance-grid,.grid,.synthesis{grid-template-columns:1fr}
+}
+@media print{
+ body{background:white;color:black} .controls,.hero-actions,.progress{display:none}
+ .dimension-card,.age-card,.synth,.glance-card{break-inside:avoid;background:white;border:1px solid #aaa}
+ .layer-2,.age-body{display:block!important} .summary,.compare-grid p,.section-intro,.lede,.age-cols p,.interpretation{color:#333}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Interactive comparative explainer</div>
+    <h1>AI, Superintelligence & Nuclear Weapons</h1>
+    <p class="lede">How far does the nuclear-arms-race analogy help us understand advanced AI? Start with the six ideas below, then open deeper layers only where you want more detail.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#glance">Start with 6 ideas</a>
+      <a class="btn" href="#dimensions">Explore all dimensions</a>
+      <a class="btn" href="#age">Age & perception</a>
+    </div>
+    <div class="note"><strong>Scope:</strong> The analogy is strongest at the level of competition, risk and governance. It is weaker at the level of the technologies themselves. Superintelligence remains hypothetical, so claims about it are scenario analysis rather than established fact.</div>
+  </div>
+</header>
+
+<main>
+<section class="section" id="glance">
+  <div class="wrap">
+    <div class="eyebrow">Tier 1 · 30-second view</div>
+    <h2>Six ideas to carry with you</h2>
+    <div class="glance-grid">
+      <div class="glance-card"><div class="num">01 · RACE DYNAMICS</div><h3>Fear of falling behind can accelerate both races.</h3><p>Competitors may take risks because slowing down alone can feel strategically dangerous.</p></div>
+      <div class="glance-card"><div class="num">02 · CATASTROPHIC RISK</div><h3>Both can produce civilization-scale concerns.</h3><p>Nuclear destruction is demonstrated; the most extreme AI outcomes remain uncertain and prospective.</p></div>
+      <div class="glance-card"><div class="num">03 · DIFFERENT TECHNOLOGIES</div><h3>AI is not simply a digital nuclear weapon.</h3><p>Nuclear weapons are specialized. AI is general-purpose, commercially useful and deeply dual-use.</p></div>
+      <div class="glance-card"><div class="num">04 · DIFFERENT PROLIFERATION</div><h3>Atoms are scarce; software is copyable.</h3><p>Nuclear programs need specialized materials and facilities. AI relies on compute and chips, but software can diffuse quickly.</p></div>
+      <div class="glance-card"><div class="num">05 · GOVERNANCE GAP</div><h3>Nuclear governance has decades of institutional experience.</h3><p>AI governance is newer, more fragmented and complicated by powerful private-sector actors.</p></div>
+      <div class="glance-card"><div class="num">06 · CENTRAL DISTINCTION</div><h3>The analogy is strongest in strategy, not mechanics.</h3><p>Security dilemmas, race pressure and verification problems overlap more than the technologies themselves do.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="dimensions">
+  <div class="wrap">
+    <div class="eyebrow">Tier 2 · Explore</div>
+    <h2>Compare the dimensions</h2>
+    <p class="section-intro">Each card starts with one sentence. Open it for the fuller nuclear-versus-AI comparison. Filter by the kind of question you care about.</p>
+  </div>
+  <div class="controls">
+    <div class="wrap control-row">
+      <button class="filter active" data-filter="All">All</button>
+      <button class="filter" data-filter="Strategy">Strategy</button>
+      <button class="filter" data-filter="Risk">Risk</button>
+      <button class="filter" data-filter="Technology">Technology</button>
+      <button class="filter" data-filter="Governance">Governance</button>
+      <button class="filter" data-filter="Society">Society</button>
+      <button class="filter" data-filter="Synthesis">Synthesis</button>
+      <input class="search" id="search" placeholder="Search: deterrence, autonomy, verification…" aria-label="Search comparison">
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="grid" id="cardGrid">
+      
+    <article class="dimension-card" data-tag="Strategy" data-search="strategic competition nuclear weapons created strong incentives for states to match or exceed rivals’ capabilities, especially during the u.s.–soviet cold war arms race. falling behind could be perceived as a threat to national survival. advanced ai may create similar incentives if governments or companies believe that superior ai could provide major economic, military, intelligence, or scientific advantages. this can encourage rapid development even when actors are concerned about safety.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Strategy</span>
+          <h3>Strategic competition</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Strategic competition">+</button>
+      </div>
+      <p class="summary">Both can create pressure to move faster because rivals may gain a major advantage first.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear weapons created strong incentives for states to match or exceed rivals’ capabilities, especially during the U.S.–Soviet Cold War arms race. Falling behind could be perceived as a threat to national survival.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>Advanced AI may create similar incentives if governments or companies believe that superior AI could provide major economic, military, intelligence, or scientific advantages. This can encourage rapid development even when actors are concerned about safety.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Strategy" data-search="security dilemma one state’s attempt to improve its security—for example, by building more missiles—could make rivals feel less secure and prompt them to expand their own arsenals. ai development may produce a comparable dynamic. safety-conscious actors may still accelerate development because they fear competitors will gain an important advantage if they slow down (boulanin et al., 2020).">
+      <div class="card-top">
+        <div>
+          <span class="tag">Strategy</span>
+          <h3>Security dilemma</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Security dilemma">+</button>
+      </div>
+      <p class="summary">Actions taken for self-protection can make competitors feel less secure and intensify the race.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>One state’s attempt to improve its security—for example, by building more missiles—could make rivals feel less secure and prompt them to expand their own arsenals.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>AI development may produce a comparable dynamic. Safety-conscious actors may still accelerate development because they fear competitors will gain an important advantage if they slow down (Boulanin et al., 2020).</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Risk" data-search="catastrophic risk nuclear weapons have demonstrated the capacity for immediate mass destruction. large-scale nuclear war could cause enormous casualties and severe global economic and environmental effects. current ai already creates risks involving cyberattacks, misinformation, surveillance, and misuse. hypothetical superintelligent systems could create much larger risks, but the probability and exact form of those outcomes remain much more uncertain.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Risk</span>
+          <h3>Catastrophic risk</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Catastrophic risk">+</button>
+      </div>
+      <p class="summary">Both can create very large harms, but nuclear destruction is demonstrated while extreme AI risk is more uncertain.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear weapons have demonstrated the capacity for immediate mass destruction. Large-scale nuclear war could cause enormous casualties and severe global economic and environmental effects.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>Current AI already creates risks involving cyberattacks, misinformation, surveillance, and misuse. Hypothetical superintelligent systems could create much larger risks, but the probability and exact form of those outcomes remain much more uncertain.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Risk" data-search="evidence of danger the physical destructive effects of nuclear weapons are well established through hiroshima, nagasaki, nuclear testing, and decades of scientific research. the harms of existing ai systems can be studied directly, but superintelligence has never existed. arguments about civilization-scale or existential ai risk therefore rely partly on theory, extrapolation, and uncertain forecasts.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Risk</span>
+          <h3>Evidence of danger</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Evidence of danger">+</button>
+      </div>
+      <p class="summary">Nuclear effects are empirically established; superintelligence remains hypothetical.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>The physical destructive effects of nuclear weapons are well established through Hiroshima, Nagasaki, nuclear testing, and decades of scientific research.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>The harms of existing AI systems can be studied directly, but superintelligence has never existed. Arguments about civilization-scale or existential AI risk therefore rely partly on theory, extrapolation, and uncertain forecasts.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Society" data-search="primary actors nuclear competition has mainly involved sovereign states. private firms may manufacture components, but governments control arsenals and deployment decisions. ai development is unusually dependent on both private companies and governments. technology firms, semiconductor manufacturers, cloud providers, universities, and states all influence the pace and direction of development.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Society</span>
+          <h3>Primary actors</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Primary actors">+</button>
+      </div>
+      <p class="summary">Nuclear arsenals are state-controlled; frontier AI is shaped by both states and private companies.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear competition has mainly involved sovereign states. Private firms may manufacture components, but governments control arsenals and deployment decisions.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>AI development is unusually dependent on both private companies and governments. Technology firms, semiconductor manufacturers, cloud providers, universities, and states all influence the pace and direction of development.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Technology" data-search="type of technology nuclear weapons are highly specialized technologies designed primarily to produce destructive military effects. ai is a general-purpose technology. the same underlying systems can support medicine, science, education, business, cybersecurity, military planning, or harmful activities.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Technology</span>
+          <h3>Type of technology</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Type of technology">+</button>
+      </div>
+      <p class="summary">Nuclear weapons are specialized weapons; AI is a general-purpose technology.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear weapons are highly specialized technologies designed primarily to produce destructive military effects.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>AI is a general-purpose technology. The same underlying systems can support medicine, science, education, business, cybersecurity, military planning, or harmful activities.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Technology" data-search="barriers to proliferation producing nuclear weapons requires scarce fissile material, specialized facilities, technical expertise, and substantial industrial infrastructure, creating high barriers to proliferation. developing frontier ai currently requires expensive computing resources, skilled researchers, data, energy, and advanced chips. however, once software or model weights exist, they may be easier to copy or distribute than nuclear material.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Technology</span>
+          <h3>Barriers to proliferation</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Barriers to proliferation">+</button>
+      </div>
+      <p class="summary">Nuclear capability depends on scarce materials and infrastructure; AI software may spread more easily once built.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Producing nuclear weapons requires scarce fissile material, specialized facilities, technical expertise, and substantial industrial infrastructure, creating high barriers to proliferation.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>Developing frontier AI currently requires expensive computing resources, skilled researchers, data, energy, and advanced chips. However, once software or model weights exist, they may be easier to copy or distribute than nuclear material.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Governance" data-search="visibility and detection nuclear programs often leave observable physical evidence, including enrichment facilities, reactors, testing infrastructure, and delivery systems. international inspection can therefore play an important role. ai development can be harder to observe because software, algorithms, and training methods are less physically visible. large data centers and semiconductor supply chains provide possible monitoring points, but verification remains difficult.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Governance</span>
+          <h3>Visibility and detection</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Visibility and detection">+</button>
+      </div>
+      <p class="summary">Nuclear programs leave physical signatures; AI activity can be harder to observe and verify.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear programs often leave observable physical evidence, including enrichment facilities, reactors, testing infrastructure, and delivery systems. International inspection can therefore play an important role.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>AI development can be harder to observe because software, algorithms, and training methods are less physically visible. Large data centers and semiconductor supply chains provide possible monitoring points, but verification remains difficult.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Strategy" data-search="deterrence nuclear deterrence relies heavily on credible retaliation. if an attacker expects a devastating second strike, it has a strong incentive not to attack in the first place (schelling, 1966). traditional deterrence may work less effectively for some ai-enabled threats. cyberattacks, disinformation, or autonomous operations may be difficult to attribute reliably, complicating retaliation and signaling.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Strategy</span>
+          <h3>Deterrence</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Deterrence">+</button>
+      </div>
+      <p class="summary">Nuclear deterrence rests on credible retaliation; AI-enabled attacks may be harder to attribute.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear deterrence relies heavily on credible retaliation. If an attacker expects a devastating second strike, it has a strong incentive not to attack in the first place (Schelling, 1966).</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>Traditional deterrence may work less effectively for some AI-enabled threats. Cyberattacks, disinformation, or autonomous operations may be difficult to attribute reliably, complicating retaliation and signaling.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Strategy" data-search="first-mover advantage states have sometimes feared that an opponent could gain an advantage through a nuclear first strike, encouraging survivable second-strike forces and crisis-stability measures. ai competitors may fear that the first actor to develop highly capable systems could gain major economic, military, or technological advantages. some theoretical work discusses the possibility of an unusually large or “decisive” strategic advantage, but this is speculative (bostrom, 2014).">
+      <div class="card-top">
+        <div>
+          <span class="tag">Strategy</span>
+          <h3>First-mover advantage</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand First-mover advantage">+</button>
+      </div>
+      <p class="summary">Both can create fear that being first confers a strategic edge, encouraging risky acceleration.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>States have sometimes feared that an opponent could gain an advantage through a nuclear first strike, encouraging survivable second-strike forces and crisis-stability measures.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>AI competitors may fear that the first actor to develop highly capable systems could gain major economic, military, or technological advantages. Some theoretical work discusses the possibility of an unusually large or “decisive” strategic advantage, but this is speculative (Bostrom, 2014).</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Technology" data-search="speed of competition nuclear arsenals generally take years to develop because they require large physical infrastructure, weapons production, testing, and delivery systems. ai capabilities can change relatively quickly through software improvements, new training methods, more computing power, and rapid deployment. ai may also increasingly assist research and software development, potentially accelerating parts of the innovation cycle.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Technology</span>
+          <h3>Speed of competition</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Speed of competition">+</button>
+      </div>
+      <p class="summary">Nuclear programs usually evolve over years; AI capabilities can change on software-development timescales.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear arsenals generally take years to develop because they require large physical infrastructure, weapons production, testing, and delivery systems.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>AI capabilities can change relatively quickly through software improvements, new training methods, more computing power, and rapid deployment. AI may also increasingly assist research and software development, potentially accelerating parts of the innovation cycle.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Technology" data-search="autonomy nuclear weapons do not independently develop strategies or improve themselves. their use ultimately depends on human command systems, although automated warning and control systems can influence decisions. ai systems can already perform some tasks with limited autonomy. a hypothetical superintelligence could potentially plan, write software, conduct research, or influence decision-making with far less direct human supervision.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Technology</span>
+          <h3>Autonomy</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Autonomy">+</button>
+      </div>
+      <p class="summary">Nuclear weapons do not strategize; increasingly capable AI systems can perform tasks with growing autonomy.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear weapons do not independently develop strategies or improve themselves. Their use ultimately depends on human command systems, although automated warning and control systems can influence decisions.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>AI systems can already perform some tasks with limited autonomy. A hypothetical superintelligence could potentially plan, write software, conduct research, or influence decision-making with far less direct human supervision.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Risk" data-search="risk of accidents nuclear accidents can result from technical failures, false alarms, miscommunication, organizational mistakes, or unauthorized actions. ai failures can arise from unreliable outputs, poorly specified objectives, unexpected behavior, software vulnerabilities, cyber compromise, or humans placing excessive trust in automated systems.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Risk</span>
+          <h3>Risk of accidents</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Risk of accidents">+</button>
+      </div>
+      <p class="summary">Both are vulnerable to technical, organizational, and human failures, though the mechanisms differ.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear accidents can result from technical failures, false alarms, miscommunication, organizational mistakes, or unauthorized actions.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>AI failures can arise from unreliable outputs, poorly specified objectives, unexpected behavior, software vulnerabilities, cyber compromise, or humans placing excessive trust in automated systems.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Governance" data-search="role of human control nuclear doctrine generally emphasizes strict command-and-control procedures intended to preserve human authority over launch decisions. human control is also central to ai governance, especially when ai is used in military decision-making, autonomous weapons, critical infrastructure, or nuclear command-and-control systems.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Governance</span>
+          <h3>Role of human control</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Role of human control">+</button>
+      </div>
+      <p class="summary">Both raise questions about how much authority humans should retain over high-consequence decisions.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear doctrine generally emphasizes strict command-and-control procedures intended to preserve human authority over launch decisions.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>Human control is also central to AI governance, especially when AI is used in military decision-making, autonomous weapons, critical infrastructure, or nuclear command-and-control systems.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Governance" data-search="arms control and verification nuclear powers have decades of experience with treaties, inspections, satellite monitoring, warhead or launcher limits, and confidence-building measures. ai governance is much less mature. proposed approaches include monitoring advanced computing resources, model evaluations, reporting requirements, export controls, auditing, and international safety standards.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Governance</span>
+          <h3>Arms control and verification</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Arms control and verification">+</button>
+      </div>
+      <p class="summary">Nuclear governance has decades of treaty practice; AI governance is newer and less settled.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear powers have decades of experience with treaties, inspections, satellite monitoring, warhead or launcher limits, and confidence-building measures.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>AI governance is much less mature. Proposed approaches include monitoring advanced computing resources, model evaluations, reporting requirements, export controls, auditing, and international safety standards.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Other" data-search="dual-use character nuclear technology has civilian applications, particularly energy and medicine, but weapons-grade materials and warhead designs are relatively distinguishable from most civilian applications. dual use is more central to ai. a model developed for programming or scientific research may also be useful for cyber operations, surveillance, military planning, persuasion, or other harmful purposes.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Other</span>
+          <h3>Dual-use character</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Dual-use character">+</button>
+      </div>
+      <p class="summary"></p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear technology has civilian applications, particularly energy and medicine, but weapons-grade materials and warhead designs are relatively distinguishable from most civilian applications.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>Dual use is more central to AI. A model developed for programming or scientific research may also be useful for cyber operations, surveillance, military planning, persuasion, or other harmful purposes.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Governance" data-search="international governance nuclear weapons are governed by a comparatively established international architecture, including the nuclear non-proliferation treaty, the international atomic energy agency, and bilateral or multilateral arms-control arrangements. international ai governance is developing and fragmented. there is no direct equivalent of the global nuclear non-proliferation system, and governance must also address private firms and globally distributed supply chains.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Governance</span>
+          <h3>International governance</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand International governance">+</button>
+      </div>
+      <p class="summary">Nuclear weapons have mature institutions; international AI governance is still fragmented.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear weapons are governed by a comparatively established international architecture, including the Nuclear Non-Proliferation Treaty, the International Atomic Energy Agency, and bilateral or multilateral arms-control arrangements.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>International AI governance is developing and fragmented. There is no direct equivalent of the global nuclear non-proliferation system, and governance must also address private firms and globally distributed supply chains.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Risk" data-search="central strategic uncertainty the destructive capability of nuclear weapons is well established; much of the uncertainty concerns political intentions, escalation, accidents, and whether deterrence will hold during crisis. with advanced ai, uncertainty concerns both human intentions and the technology itself: how capable future systems will become, how quickly they will develop, and whether increasingly autonomous systems will remain reliably controllable.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Risk</span>
+          <h3>Central strategic uncertainty</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Central strategic uncertainty">+</button>
+      </div>
+      <p class="summary">Nuclear uncertainty is mainly about escalation and intentions; AI uncertainty also concerns what the technology will become.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>The destructive capability of nuclear weapons is well established; much of the uncertainty concerns political intentions, escalation, accidents, and whether deterrence will hold during crisis.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>With advanced AI, uncertainty concerns both human intentions and the technology itself: how capable future systems will become, how quickly they will develop, and whether increasingly autonomous systems will remain reliably controllable.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    <article class="dimension-card" data-tag="Synthesis" data-search="overall analogy nuclear weapons provide a historical example of how transformative technology can generate arms races, deterrence relationships, catastrophic risk, and international attempts at control. ai shares many strategic dynamics with nuclear competition, but differs because it is general-purpose, commercially valuable, software-based, more widely distributed, and potentially capable of increasingly autonomous action. nuclear history is therefore a useful analogy, but not a complete model.">
+      <div class="card-top">
+        <div>
+          <span class="tag">Synthesis</span>
+          <h3>Overall analogy</h3>
+        </div>
+        <button class="expand-btn" aria-expanded="false" aria-label="Expand Overall analogy">+</button>
+      </div>
+      <p class="summary">The strongest similarity is strategic dynamics, not the underlying technology.</p>
+      <div class="layer layer-2">
+        <div class="compare-grid">
+          <section>
+            <div class="mini-label nuclear">NUCLEAR</div>
+            <p>Nuclear weapons provide a historical example of how transformative technology can generate arms races, deterrence relationships, catastrophic risk, and international attempts at control.</p>
+          </section>
+          <section>
+            <div class="mini-label ai">AI / SUPERINTELLIGENCE</div>
+            <p>AI shares many strategic dynamics with nuclear competition, but differs because it is general-purpose, commercially valuable, software-based, more widely distributed, and potentially capable of increasingly autonomous action. Nuclear history is therefore a useful analogy, but not a complete model.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+    
+    </div>
+
+    <div class="synthesis">
+      <div class="synth"><div class="eyebrow">What the analogy gets right</div><h3>Strategic competition</h3><p>Both technologies can create security dilemmas, first-mover fears, incentives to accelerate, verification problems and the possibility that individually rational choices produce collectively dangerous outcomes.</p></div>
+      <div class="synth"><div class="eyebrow">Where it breaks down</div><h3>Technology and diffusion</h3><p>AI is general-purpose, commercially valuable, software-based and developed by private firms as well as states. Its capabilities are also less settled, making the object of regulation itself more uncertain.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="age">
+  <div class="wrap">
+    <div class="eyebrow">Tier 2 · Social lens</div>
+    <h2>Age changes the time horizon — but in two directions</h2>
+    <p class="section-intro">Age should not be treated as a simple proxy for technological wisdom. It combines lived experience, generational cohort, familiarity, employment horizon and the historical moment in which people are surveyed.</p>
+
+    <div class="horizon">
+      <div class="horizon-box"><div class="eyebrow">Older adults</div><h3>Longer retrospective horizon</h3><p>More lived experience of technological booms, disappointments and genuine transformations — and, for many, direct memory of Cold War nuclear risk.</p></div>
+      <div class="arrow">↔</div>
+      <div class="horizon-box"><div class="eyebrow">Younger adults</div><h3>Longer prospective horizon</h3><p>More of their future lives may be shaped by AI's effects on work, security, institutions and everyday life, even while nuclear danger is more historical than personally remembered.</p></div>
+    </div>
+
+    <div class="age-stack">
+      
+    <article class="age-card">
+      <button class="age-head" aria-expanded="false">
+        <span>Retrospective vs. prospective horizon</span><span class="chev">⌄</span>
+      </button>
+      <div class="age-body">
+        <div class="age-cols">
+          <section><h4>Longer retrospective horizon</h4><p>Older adults have a longer retrospective horizon: they have personally observed more cycles of technological enthusiasm, disappointment, diffusion, and normalization.</p></section>
+          <section><h4>Longer prospective horizon</h4><p>Younger adults have a longer prospective horizon: they are likely to live with the economic, social, and security consequences of current AI development for more decades.</p></section>
+        </div>
+        <div class="interpretation"><strong>Interpretation:</strong> These are different kinds of “long-term perspective,” and neither automatically produces a better risk judgment.</div>
+      </div>
+    </article>
+    
+    <article class="age-card">
+      <button class="age-head" aria-expanded="false">
+        <span>Everyday familiarity with AI</span><span class="chev">⌄</span>
+      </button>
+      <div class="age-body">
+        <div class="age-cols">
+          <section><h4>Longer retrospective horizon</h4><p>Older adults, on average, use AI chatbots less frequently and are more likely to report uncertainty about AI’s future effects.</p></section>
+          <section><h4>Longer prospective horizon</h4><p>Younger adults are more frequent users of AI tools. In Pew’s 2026 U.S. survey, chatbot use was substantially higher among adults under 50 than among older adults.</p></section>
+        </div>
+        <div class="interpretation"><strong>Interpretation:</strong> Greater familiarity does not necessarily mean greater optimism; younger Americans have also become markedly more concerned about AI (Pew Research Center, 2026a, 2026b).</div>
+      </div>
+    </article>
+    
+    <article class="age-card">
+      <button class="age-head" aria-expanded="false">
+        <span>Historical experience of nuclear risk</span><span class="chev">⌄</span>
+      </button>
+      <div class="age-body">
+        <div class="age-cols">
+          <section><h4>Longer retrospective horizon</h4><p>Many older adults have direct memories of Cold War nuclear politics, civil-defense culture, arms-control debates, and recurrent fears of U.S.–Soviet escalation.</p></section>
+          <section><h4>Longer prospective horizon</h4><p>Younger adults generally encounter the Cold War nuclear threat through history, media, and contemporary geopolitical crises rather than personal memory.</p></section>
+        </div>
+        <div class="interpretation"><strong>Interpretation:</strong> For nuclear weapons, the older generation often has the greater direct experiential horizon; for AI, the younger generation often has the greater everyday technological exposure.</div>
+      </div>
+    </article>
+    
+    <article class="age-card">
+      <button class="age-head" aria-expanded="false">
+        <span>How attitudes change over time</span><span class="chev">⌄</span>
+      </button>
+      <div class="age-body">
+        <div class="age-cols">
+          <section><h4>Longer retrospective horizon</h4><p>Long exposure can normalize a technology, but it can also create skepticism toward hype or make rare catastrophic risks feel more concrete.</p></section>
+          <section><h4>Longer prospective horizon</h4><p>Younger cohorts may initially be more open to new technologies, yet their attitudes can change rapidly as consequences become visible.</p></section>
+        </div>
+        <div class="interpretation"><strong>Interpretation:</strong> U.S. concern about AI among ages 18–29 rose from 31% in 2021 to 55% in 2026, illustrating that generational attitudes are not fixed (Pew Research Center, 2026b).</div>
+      </div>
+    </article>
+    
+    <article class="age-card">
+      <button class="age-head" aria-expanded="false">
+        <span>Experts versus the general public</span><span class="chev">⌄</span>
+      </button>
+      <div class="age-body">
+        <div class="age-cols">
+          <section><h4>Longer retrospective horizon</h4><p>Expert views are not uniform and should not be reduced to age alone. Senior experts may bring experience of earlier technological cycles, while younger experts may have deeper day-to-day exposure to recent frontier systems.</p></section>
+          <section><h4>Longer prospective horizon</h4><p>Across age groups, professional knowledge, field, employer, and direct technical experience may matter as much as or more than chronological age.</p></section>
+        </div>
+        <div class="interpretation"><strong>Interpretation:</strong> A 2025 Pew survey found AI experts substantially more optimistic about AI’s long-term effects than the U.S. public overall, showing that expertise can create a larger perceptual divide than age by itself (Pew Research Center, 2025).</div>
+      </div>
+    </article>
+    
+    <article class="age-card">
+      <button class="age-head" aria-expanded="false">
+        <span>Best interpretation</span><span class="chev">⌄</span>
+      </button>
+      <div class="age-body">
+        <div class="age-cols">
+          <section><h4>Longer retrospective horizon</h4><p>Age provides historical context but is entangled with cohort and life-stage effects.</p></section>
+          <section><h4>Longer prospective horizon</h4><p>Younger people may perceive greater personal exposure to future labor-market and social disruption because more of their working lives lie ahead.</p></section>
+        </div>
+        <div class="interpretation"><strong>Interpretation:</strong> The most defensible conclusion is that perception reflects an interaction among age, cohort, familiarity, direct experience, expertise, and expected future exposure—not a simple “older = wiser” or “younger = more adaptable” rule.</div>
+      </div>
+    </article>
+    
+    </div>
+  </div>
+</section>
+
+<section class="section refs" id="sources">
+  <div class="wrap">
+    <div class="eyebrow">Tier 3 · Deep dive</div>
+    <h2>References & interpretive caution</h2>
+    <p class="section-intro">Use these when you want to move from the interactive overview to academic reading or citation.</p>
+    <details>
+      <summary>Open selected references</summary>
+      <ol><li><strong>Bostrom, N. (2014).</strong> Superintelligence: Paths, Dangers, Strategies. Oxford University Press.</li>
+<li><strong>Boulanin, V. et al. (2020).</strong> Artificial Intelligence, Strategic Stability and Nuclear Risk. SIPRI.</li>
+<li><strong>International AI Safety Report (2026).</strong> International AI Safety Report 2026.</li>
+<li><strong>Pew Research Center (2025).</strong> How the U.S. Public and AI Experts View Artificial Intelligence.</li>
+<li><strong>Pew Research Center (2026).</strong> How Americans’ Opinions and Use of AI Differ by Age.</li>
+<li><strong>Pew Research Center (2026).</strong> Young U.S. Adults Are Increasingly Wary of AI, Concerned It Will Take Jobs.</li>
+<li><strong>Sagan, S. D., &amp; Waltz, K. N. (2012).</strong> The Spread of Nuclear Weapons: An Enduring Debate (3rd ed.).</li>
+<li><strong>Schelling, T. C. (1966).</strong> Arms and Influence. Yale University Press.</li></ol>
+    </details>
+    <div class="note"><strong>Method note:</strong> Age differences are difficult to interpret causally because chronological age, generational cohort and historical-period effects overlap. Expert opinion is also heterogeneous; expertise does not imply a single view about AI timelines, risk or governance.</div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">Designed as a single-file, dependency-free HTML artifact. You can host it on GitHub Pages, Netlify, Cloudflare Pages, a university web space, or any static-file host.</div>
+</footer>
+
+<script>
+const cards = [...document.querySelectorAll('.dimension-card')];
+document.querySelectorAll('.expand-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.dimension-card');
+    const open = card.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  });
+});
+document.querySelectorAll('.filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
+  });
+});
+document.getElementById('search').addEventListener('input', applyFilters);
+function applyFilters(){
+  const tag = document.querySelector('.filter.active').dataset.filter;
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  cards.forEach(card => {
+    const matchTag = tag==='All' || card.dataset.tag===tag;
+    const matchQ = !q || card.dataset.search.includes(q);
+    card.classList.toggle('hidden', !(matchTag && matchQ));
+  });
+}
+document.querySelectorAll('.age-head').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.age-card');
+    const open = card.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  });
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (h ? (window.scrollY/h)*100 : 0) + '%';
+});
+</script>
+</body>
+</html>
